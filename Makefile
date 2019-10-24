@@ -8,15 +8,20 @@ LDFLAGS = -Llibs -lpthread -lrt -lgridstore
 CPPFLAGS = -fPIC -std=c++0x -g -O2
 INCLUDES = -Iinclude -Isrc
 
+PYTHON_INC = /usr/include/python3.6
+ifeq ("$(wildcard $(PYTHON_INC_DIR))","")
+ PYTHON_INC = /usr/include/python3.6m
+endif
+
 INCLUDES_PYTHON = $(INCLUDES)	\
-				-I/usr/include/python3.6
+				-I$(PYTHON_INC)
 
 PROGRAM = _griddb_python.so
 EXTRA = griddb_python.py griddb_python.pyc
 
 SOURCES = 	  src/TimeSeriesProperties.cpp \
 		  src/ContainerInfo.cpp			\
-  		  src/AggregationResult.cpp	\
+		  src/AggregationResult.cpp	\
 		  src/Container.cpp			\
 		  src/Store.cpp			\
 		  src/StoreFactory.cpp	\
